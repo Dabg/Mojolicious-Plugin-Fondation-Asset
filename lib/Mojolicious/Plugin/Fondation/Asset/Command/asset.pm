@@ -178,7 +178,7 @@ Scans all Fondation plugins for C<share/assets/assetpack.def> files,
 merges them into a single C<assets/assetpack.def>, and processes the
 bundles through L<Mojolicious::Plugin::AssetPack>.
 
-AssetPack serves assets dynamically through its route — no C<app.css>
+AssetPack serves assets dynamically through its route -- no C<app.css>
 or C<app.js> files are written to disk.
 
 =head1 SUBCOMMANDS

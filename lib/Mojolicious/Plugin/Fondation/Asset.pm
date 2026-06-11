@@ -1,6 +1,6 @@
 package Mojolicious::Plugin::Fondation::Asset;
 
-# ABSTRACT: AssetPack wrapper — generate via command, load pre-built def at runtime
+# ABSTRACT: AssetPack wrapper -- generate via command, load pre-built def at runtime
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 
@@ -28,7 +28,7 @@ mode). Local assets keep their original C<< < >> operator.
 
 At runtime (C<fondation_finalyze>), AssetPack is loaded only if the merged
 C<assetpack.def> exists. If missing, a warning is logged and startup
-continues — run C<asset generate> first. If the def exists, AssetPack is
+continues -- run C<asset generate> first. If the def exists, AssetPack is
 loaded, plugin public directories are registered as store paths, and
 C<process()> is called to register all asset topics. This second
 C<process()> call skips already-cached external files.
@@ -61,7 +61,7 @@ AssetPack is loaded, plugin public directories are registered, and
 C<process()> is called to register all asset topics for template helpers.
 External files already cached by C<asset generate> are not re-downloaded.
 
-If the def is missing, a warning is logged and startup continues — run
+If the def is missing, a warning is logged and startup continues -- run
 C<asset generate> first.
 
 =cut
@@ -101,7 +101,7 @@ sub fondation_finalyze ($self, $app, $long_name) {
         return;
     }
 
-    # Load AssetPack — it auto-discovers assetpack.def from assets/
+    # Load AssetPack -- it auto-discovers assetpack.def from assets/
     $app->plugin('AssetPack' => {
         pipes => [qw(Fetch Sass Css Combine)],
     });

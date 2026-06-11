@@ -1,6 +1,6 @@
 # NAME
 
-Mojolicious::Plugin::Fondation::Asset - AssetPack wrapper — generate via command, load pre-built def at runtime
+Mojolicious::Plugin::Fondation::Asset - AssetPack wrapper -- generate via command, load pre-built def at runtime
 
 # VERSION
 
@@ -24,7 +24,7 @@ mode). Local assets keep their original `<` operator.
 
 At runtime (`fondation_finalyze`), AssetPack is loaded only if the merged
 `assetpack.def` exists. If missing, a warning is logged and startup
-continues — run `asset generate` first. If the def exists, AssetPack is
+continues -- run `asset generate` first. If the def exists, AssetPack is
 loaded, plugin public directories are registered as store paths, and
 `process()` is called to register all asset topics. This second
 `process()` call skips already-cached external files.
@@ -61,7 +61,7 @@ AssetPack is loaded, plugin public directories are registered, and
 `process()` is called to register all asset topics for template helpers.
 External files already cached by `asset generate` are not re-downloaded.
 
-If the def is missing, a warning is logged and startup continues — run
+If the def is missing, a warning is logged and startup continues -- run
 `asset generate` first.
 
 # AUTHOR
