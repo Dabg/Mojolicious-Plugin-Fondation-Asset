@@ -124,7 +124,7 @@ sub run ($self, @args) {
         my $assets_dir = $app->home->child('assets');
         $assets_dir->make_path unless -d $assets_dir;
 
-        $def_path->spew($merged_dsl);
+        $def_path->spurt($merged_dsl);
 
         my $count = scalar keys %bundles;
         $app->log->debug("Merged assetpack.def written ($count bundles)");
