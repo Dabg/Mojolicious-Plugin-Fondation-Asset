@@ -5,9 +5,9 @@
 requires 'perl' => '5.026';
 
 # Runtime dependencies
-requires 'Mojolicious' => '9.00';  # Mojolicious 9.00+ for -signatures support
+requires 'Mojolicious' => '9.46';  # Mojolicious 9.00+ for -signatures support
 requires 'Mojolicious::Plugin::Fondation' => '0.01';
-requires 'Mojolicious::Plugin::AssetPack' => '2.00';
+requires 'Mojolicious::Plugin::AssetPack' => '2.15';
 requires 'YAML::XS' => '0.90';
 requires 'CSS::Minifier::XS' => '0.13';
 
