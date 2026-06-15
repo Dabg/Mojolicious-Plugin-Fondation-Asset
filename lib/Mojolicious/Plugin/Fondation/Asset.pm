@@ -6,10 +6,6 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 
 our $VERSION = '0.02';
 
-=head1 NAME
-
-Mojolicious::Plugin::Fondation::Asset - AssetPack wrapper with command-based generation
-
 =head1 SYNOPSIS
 
   # myapp.pl asset generate          Generate assets/assetpack.def + process
