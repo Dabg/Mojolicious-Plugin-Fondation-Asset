@@ -1,4 +1,8 @@
 Revision history for Mojolicious-Plugin-Fondation-Asset
 
+{{$NEXT}}
+  - Arrayref is no longer allowed
+  - update dist.ini / README.md
+
 0.01 2026-06-10
   - Initial release

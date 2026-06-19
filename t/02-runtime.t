@@ -27,7 +27,7 @@ sub build_app {
     return create_fondation_app($tmpdir, {
         dependencies => [
             {'Fondation::Asset'     => {}},
-            ['Fondation::TestAsset' => { share_dir => $SHARE_DIR }],
+            {'Fondation::TestAsset' => { share_dir => $SHARE_DIR }},
         ],
     });
 }
@@ -57,7 +57,7 @@ sub app_from_home {
     $app->plugin('Fondation' => {
         dependencies => [
             {'Fondation::Asset'     => {}},
-            ['Fondation::TestAsset' => { share_dir => $SHARE_DIR }],
+            {'Fondation::TestAsset' => { share_dir => $SHARE_DIR }},
         ],
     });
 

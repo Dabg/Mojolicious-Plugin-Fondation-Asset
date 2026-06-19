@@ -29,10 +29,6 @@ loaded, plugin public directories are registered as store paths, and
 `process()` is called to register all asset topics. This second
 `process()` call skips already-cached external files.
 
-# NAME
-
-Mojolicious::Plugin::Fondation::Asset - AssetPack wrapper with command-based generation
-
 # CONFIGURATION
 
     # myapp.conf

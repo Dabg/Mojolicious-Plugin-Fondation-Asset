@@ -26,7 +26,7 @@ sub build_app {
     return create_fondation_app($tmpdir, {
         dependencies => [
             {'Fondation::Asset'     => {}},
-            ['Fondation::TestAsset' => { share_dir => $share_dir }],
+            {'Fondation::TestAsset' => { share_dir => $share_dir }},
         ],
     });
 }
