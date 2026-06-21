@@ -114,7 +114,14 @@ sub fondation_finalyze ($self, $app, $long_name) {
         }
     }
 
-    # Process assets to register topics (skips already-cached external files)
+    # Process assets to register topics (skips already-cached external files).
+    # Skip during 'fondation refresh' — the clean phase will remove assets/,
+    # then 'asset generate -y' in the init phase will rebuild from scratch.
+    if (grep { $_ eq 'refresh' } @ARGV) {
+        $self->log->debug("Skipping AssetPack process during fondation refresh");
+        return;
+    }
+
     $asset->process();
 
     $self->log->debug("AssetPack loaded from $def_file");
