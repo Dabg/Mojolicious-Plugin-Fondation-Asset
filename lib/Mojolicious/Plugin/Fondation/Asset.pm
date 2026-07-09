@@ -65,6 +65,7 @@ C<asset generate> first.
 sub fondation_meta {
     return {
         dependencies => [],
+        after        => ['Fondation::OpenAPI'],
         defaults     => {
             fondation_init    => [
                 ['asset', 'generate', '-y'],
