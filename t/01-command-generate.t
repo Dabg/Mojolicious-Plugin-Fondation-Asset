@@ -38,7 +38,7 @@ sub build_app {
 subtest 'Generate creates merged assetpack.def' => sub {
     my $app      = build_app;
     my $out      = capture_command($app, 'asset', 'generate', '-y');
-    my $def_file = $app->home->child('assets', 'assetpack.def');
+    my $def_file = $app->home->child('share', 'assets', 'assetpack.def');
 
     ok(-f $def_file, 'assetpack.def created')
         or diag "output: $out";
@@ -95,7 +95,7 @@ subtest 'No asset definitions found' => sub {
     my $out = capture_command($app, 'asset', 'generate', '-y');
 
     like($out, qr/No asset definitions found/, 'reports no definitions');
-    ok(!-f $app->home->child('assets', 'assetpack.def'),
+    ok(!-f $app->home->child('share', 'assets', 'assetpack.def'),
        'no file created when no definitions exist');
 };
 

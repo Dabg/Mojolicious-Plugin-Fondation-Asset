@@ -1,6 +1,7 @@
 Revision history for Mojolicious-Plugin-Fondation-Asset
 
 {{$NEXT}}
+  - add 'setup' to configure plugin
 
 0.01      2026-07-12 10:26:06+02:00 Europe/Paris
   - Initial release

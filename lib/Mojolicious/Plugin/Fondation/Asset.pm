@@ -72,7 +72,29 @@ sub fondation_meta {
             fondation_upgrade => [
                 ['asset', 'generate', '-y'],
             ],
-            fondation_clean   => ['assets/'],
+            fondation_clean   => ['share/assets/'],
+        },
+        setup => {
+            label       => 'AssetPack',
+            description => 'Asset configuration',
+            parameters  => [
+                {
+                    key         => 'asset_dir',
+                    label       => 'Asset output directory',
+                    type        => 'string',
+                    default     => 'share/assets',
+                    required    => 1,
+                    placeholder => 'share/assets',
+                },
+                {
+                    key         => 'pipes',
+                    label       => 'Pipes',
+                    type        => 'string',
+                    default     => 'Fetch,Sass,Css,Combine',
+                    required    => 1,
+                    placeholder => 'Fetch,Sass,Css,Combine',
+                },
+            ],
         },
     };
 }
@@ -87,7 +109,9 @@ sub register ($self, $app, $conf = {}) {
 }
 
 sub fondation_finalyze ($self, $app, $long_name) {
-    my $def_file = $app->home->child('assets', 'assetpack.def');
+    my $conf      = $app->defaults('asset.config') // {};
+    my $asset_dir = $conf->{asset_dir} // 'share/assets';
+    my $def_file  = $app->home->child($asset_dir, 'assetpack.def');
 
     unless (-f $def_file) {
         $self->log->warn(
@@ -97,13 +121,17 @@ sub fondation_finalyze ($self, $app, $long_name) {
         return;
     }
 
-    # Load AssetPack -- it auto-discovers assetpack.def from assets/
+    # Load AssetPack with custom store path so it finds the def and writes bundles there
+    my @pipes = split /\s*,\s*/, ($conf->{pipes} // 'Fetch,Sass,Css,Combine');
     $app->plugin('AssetPack' => {
-        pipes => [qw(Fetch Sass Css Combine)],
+        pipes => \@pipes,
     });
 
-    # Register local public/ and plugin public dirs for asset resolution
+    # Override the default store path (normally 'assets') with the configured directory
     my $asset = $app->asset;
+    $asset->store->paths([$app->home->child($asset_dir)]);
+
+    # Register local public/ and plugin public dirs for asset resolution
     push @{ $asset->store->paths }, $app->home->child('public');
 
     for my $long (@{ $app->manager->load_order }) {

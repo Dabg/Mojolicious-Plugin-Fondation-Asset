@@ -25,6 +25,8 @@ sub run ($self, @args) {
     my $config = $app->defaults->{'asset.config'}
         or die "Asset not configured. Add Fondation::Asset to your config.\n";
 
+    my $asset_dir = $config->{asset_dir} // 'share/assets';
+
     my $subcommand = shift @args || '';
 
     die $self->usage unless $subcommand eq 'generate';
@@ -41,11 +43,11 @@ sub run ($self, @args) {
         }
     }
 
-    my $def_path = $app->home->child('assets', 'assetpack.def');
+    my $def_path = $app->home->child($asset_dir, 'assetpack.def');
 
     # Overwrite check
     if (!$force && -f $def_path) {
-        print "File 'assets/assetpack.def' already exists. Overwrite? [y/N] ";
+        print "File '$asset_dir/assetpack.def' already exists. Overwrite? [y/N] ";
         my $answer = <STDIN>;
         chomp $answer;
         exit(0) unless $answer =~ /^y(es)?$/i;
@@ -121,7 +123,7 @@ sub run ($self, @args) {
     }
 
     if ($merged_dsl) {
-        my $assets_dir = $app->home->child('assets');
+        my $assets_dir = $app->home->child($asset_dir);
         $assets_dir->make_path unless -d $assets_dir;
 
         $def_path->spurt($merged_dsl);
@@ -138,10 +140,14 @@ sub run ($self, @args) {
 
     my $asset;
 
+    my @pipes = split /\s*,\s*/, ($config->{pipes} // 'Fetch,Sass,Css,Combine');
     $app->plugin('AssetPack' => {
-                     pipes => [qw(Fetch Sass Css Combine)],
+                     pipes => \@pipes,
                  });
     $asset = $app->asset;
+
+    # Point the store to the configured directory so it finds the def and writes there
+    $asset->store->paths([$app->home->child($asset_dir)]);
 
     # Push store paths for asset resolution
     push @{ $asset->store->paths }, $app->home->child('public');
