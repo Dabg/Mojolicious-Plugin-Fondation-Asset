@@ -4,7 +4,6 @@ package Mojolicious::Plugin::Fondation::Asset;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 
-our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
