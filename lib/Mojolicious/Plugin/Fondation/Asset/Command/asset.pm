@@ -6,8 +6,6 @@ use Mojo::Base 'Mojolicious::Command', -signatures;
 
 use Mojo::File 'path';
 
-our $VERSION = '0.01';
-
 has description => 'Generate and process asset bundles';
 has usage       => sub ($self) {
     <<"USAGE";
